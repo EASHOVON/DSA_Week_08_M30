@@ -14,6 +14,48 @@ public:
     }
 };
 
+void spacePrint(int level)
+{
+    for (int i = 0; i < level; i++)
+    {
+        cout << "   ";
+    }
+}
+
+void printTree(treeNode *root, int level)
+{
+    if (root == NULL) // When the tree is empty
+    {
+        return;
+    }
+
+    if (root->leftChild == NULL && root->rightChild == NULL) // Case 1
+    {
+        cout << root->data << endl;
+        return;
+    }
+    else // Case 2
+    {
+        cout << endl;
+        spacePrint(level);
+        cout << "Root: " << root->data << endl;
+    }
+
+    if (root->leftChild != NULL)
+    {
+        spacePrint(level);
+        cout << "Left: ";
+        printTree(root->leftChild, level + 1);
+    }
+
+    if (root->rightChild != NULL)
+    {
+        spacePrint(level);
+        cout << "Right: ";
+        printTree(root->rightChild, level + 1);
+    }
+}
+
 int main()
 {
     int n;
@@ -21,7 +63,7 @@ int main()
     treeNode *allNodes[n];
     for (int i = 0; i < n; i++)
     {
-        allNodes[i]->data = -1;
+        allNodes[i] = new treeNode(-1);
     }
 
     for (int i = 0; i < n; i++)
@@ -29,7 +71,11 @@ int main()
         int value, left, right;
         cin >> value >> left >> right;
         allNodes[i]->data = value;
-
+        if (left > n - 1 || right > n - 1)
+        {
+            cout << "Invalid Index" << endl;
+            break;
+        }
         if (left != -1)
         {
             allNodes[i]->leftChild = allNodes[left];
@@ -40,5 +86,7 @@ int main()
             allNodes[i]->rightChild = allNodes[right];
         }
     }
+
+    printTree(allNodes[0], 0);
     return 0;
 }
