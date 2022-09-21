@@ -24,6 +24,26 @@ void inOrderTrav(treeNode *root, string &chk) // A->0,l->0
     chk += to_string(root->data);
     inOrderTrav(root->rightChild, chk);
 }
+void preOrderTrav(treeNode *root, string &chk) // A->0,l->0
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    chk += to_string(root->data);
+    inOrderTrav(root->leftChild, chk);
+    inOrderTrav(root->rightChild, chk);
+}
+void postOrderTrav(treeNode *root, string &chk) // A->0,l->0
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    inOrderTrav(root->leftChild, chk);
+    inOrderTrav(root->rightChild, chk);
+    chk += to_string(root->data);
+}
 
 int main()
 {
@@ -55,9 +75,15 @@ int main()
             allNodes[i]->rightChild = allNodes[right];
         }
     }
-    string blank = "";
+    string preOrdertext = "";
+    string inOrdertext = "";
+    string postOrdertext = "";
 
-    inOrderTrav(allNodes[0], blank);
-    cout << blank << endl;
+    preOrderTrav(allNodes[0], preOrdertext);
+    inOrderTrav(allNodes[0], inOrdertext);
+    postOrderTrav(allNodes[0], postOrdertext);
+    cout << "Pre-Order: " << preOrdertext << endl;
+    cout << "In-Order: " << inOrdertext << endl;
+    cout << "Post-Order: " << postOrdertext << endl;
     return 0;
 }
