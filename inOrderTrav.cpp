@@ -14,46 +14,15 @@ public:
     }
 };
 
-void spacePrint(int level)
+void inOrderTrav(treeNode *root, string &chk) // A->0,l->0
 {
-    for (int i = 0; i < level; i++)
-    {
-        cout << "   ";
-    }
-}
-
-// This is pre order Travarsel
-void printTree(treeNode *root, int level) // A->0,l->0
-{
-    if (root == NULL) // When the tree is empty -> A->0,l->0 = Not enter
+    if (root == NULL)
     {
         return;
     }
-
-    if (root->leftChild == NULL && root->rightChild == NULL) // Case 1 -> Not here
-    {
-        cout << root->data << endl;
-        return;
-    }
-    else // Case 2 -> yes here
-    {
-        cout << endl;
-        spacePrint(level);
-        cout << "Root: " << root->data << endl;
-    }
-
-    if (root->leftChild != NULL)
-    {
-        spacePrint(level);
-        cout << "Left: ";
-        printTree(root->leftChild, level + 1);
-    }
-    if (root->rightChild != NULL)
-    {
-        spacePrint(level);
-        cout << "Right: ";
-        printTree(root->rightChild, level + 1);
-    }
+    inOrderTrav(root->leftChild, chk);
+    chk += to_string(root->data);
+    inOrderTrav(root->rightChild, chk);
 }
 
 int main()
@@ -86,7 +55,9 @@ int main()
             allNodes[i]->rightChild = allNodes[right];
         }
     }
+    string blank = "";
 
-    printTree(allNodes[0], 0);
+    inOrderTrav(allNodes[0], blank);
+    cout << blank << endl;
     return 0;
 }
