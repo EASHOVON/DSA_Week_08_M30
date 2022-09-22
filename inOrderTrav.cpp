@@ -84,6 +84,6 @@ int main()
     postOrderTrav(allNodes[0], postOrdertext);
     cout << "Pre-Order: " << preOrdertext << endl;
     cout << "In-Order: " << inOrdertext << endl;
-    cout << "Post-Order: " << postOrdertext << endl;
+    cout << "Post-Order: " << postOrdertext << endl; //
     return 0;
 }
