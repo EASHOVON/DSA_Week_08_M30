@@ -14,7 +14,7 @@ public:
     }
 };
 
-void inOrderTrav(treeNode *root, string &chk) // A->0,l->0
+void inOrderTrav(treeNode *root, string &chk)
 {
     if (root == NULL)
     {
@@ -24,7 +24,7 @@ void inOrderTrav(treeNode *root, string &chk) // A->0,l->0
     chk += to_string(root->data);
     inOrderTrav(root->rightChild, chk);
 }
-void preOrderTrav(treeNode *root, string &chk) // A->0,l->0
+void preOrderTrav(treeNode *root, string &chk)
 {
     if (root == NULL)
     {
@@ -34,7 +34,7 @@ void preOrderTrav(treeNode *root, string &chk) // A->0,l->0
     inOrderTrav(root->leftChild, chk);
     inOrderTrav(root->rightChild, chk);
 }
-void postOrderTrav(treeNode *root, string &chk) // A->0,l->0
+void postOrderTrav(treeNode *root, string &chk)
 {
     if (root == NULL)
     {
@@ -49,13 +49,13 @@ int main()
 {
     int n;
     cin >> n;
-    treeNode *allNodes[n];
-    for (int i = 0; i < n; i++)
+    treeNode *allNodes[n + 1];
+    for (int i = 0; i <= n; i++)
     {
         allNodes[i] = new treeNode(-1);
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= n; i++)
     {
         int value, left, right;
         cin >> value >> left >> right;
@@ -84,6 +84,6 @@ int main()
     postOrderTrav(allNodes[0], postOrdertext);
     cout << "Pre-Order: " << preOrdertext << endl;
     cout << "In-Order: " << inOrdertext << endl;
-    cout << "Post-Order: " << postOrdertext << endl; //
+    cout << "Post-Order: " << postOrdertext << endl;
     return 0;
 }
